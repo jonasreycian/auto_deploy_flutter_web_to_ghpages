@@ -1,4 +1,4 @@
-# auto_deploy_flutter_web_to_ghpages
+# Automated Deployment of Flutter Web using Github Actions
 
 A new Flutter project.
 
