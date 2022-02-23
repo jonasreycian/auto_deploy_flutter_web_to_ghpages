@@ -1,7 +1,7 @@
 {
     "name": "auto_deploy_flutter_web_to_ghpages",
     "short_name": "auto_deploy_flutter_web_to_ghpages",
-    "start_url": "/auto_deploy_flutter_web_to_ghpages/web",
+    "start_url": "/auto_deploy_flutter_web_to_ghpages/web/",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
