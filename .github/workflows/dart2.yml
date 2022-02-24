@@ -46,4 +46,11 @@ jobs:
       # - name: Build web
       #   run: flutter build web
       - name: Deploy to GitHub pages
-        run: sh deploy_docs.sh
+        # run: sh deploy.sh
+        run: |
+          flutter build web --release
+          cp build/web docs
+          git add .
+          git commit -m 'Deploy'
+          git push origin HEAD --force
+          rm -r build
