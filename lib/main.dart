@@ -35,7 +35,7 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Text('Hello World!'),
+              Text('My first blog!'),
             ],
           ),
         ),
