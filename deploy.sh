@@ -3,6 +3,9 @@
 # abort on errors
 set -e
 
+git config user.name "Jonas Reycian Saraosos"
+git config user.email "jonasreycian@gmail.com"
+
 git checkout --orphan gh-pages
 
 flutter build web --release
