@@ -47,7 +47,8 @@ jobs:
       - name: Deploy to GitHub pages
         # run: sh deploy.sh
         run: |
-          flutter build web --release
+          flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
+          sed -i 's/\/auto_/auto_/g' build/web/index.html
           cp -r build/web/ docs
           git config user.name "Jonas Reycian"
           git config user.email "jonasreycian@gmail.com"
