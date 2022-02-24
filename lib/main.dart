@@ -29,12 +29,15 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Deploy to Github Pages'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text('Hello World!'),
-          ],
+      body: Container(
+        color: Colors.amber[50],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              Text('Hello World!'),
+            ],
+          ),
         ),
       ),
     );
