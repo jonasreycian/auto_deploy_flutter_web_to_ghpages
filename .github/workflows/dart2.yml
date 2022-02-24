@@ -6,9 +6,8 @@
 name: Dart
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
@@ -43,19 +42,26 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      # - name: Build web
-      #   run: flutter build web
+      - name: Build web
+        run: flutter build web
       - name: Deploy to GitHub pages
         # run: sh deploy.sh
         run: |
           flutter build web --release
           cp -r build/web docs
-          git config user.name $USER_NAME
-          git config user.email $USER_EMAIL
+          git config user.name "Jonas Reycian"
+          git config user.email "jonasreycian@gmail.com"
           git add .
           git commit -m 'Deploy'
           git push origin HEAD --force
           rm -r build
-        env:
-         USER_NAME: ${{ secrets.USER_NAME }}
-         USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      #   env:
+      #    USER_NAME: ${{ secrets.USER_NAME }}
+      #    USER_EMAIL: ${{ secrets.USER_EMAIL }}
+  
+  # deploy-web:
+  #   name: Deploy to GitHub Pages 
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - 
