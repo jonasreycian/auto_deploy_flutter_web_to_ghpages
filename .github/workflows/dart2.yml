@@ -50,8 +50,8 @@ jobs:
         run: |
           flutter build web --release
           cp -r build/web docs
-          git config user.name {{ secrets.USER_NAME }}
-          git config user.email {{ secrets.USER_EMAIL }}
+          git config user.name ${{ secrets.USER_NAME }}
+          git config user.email ${{ secrets.USER_EMAIL }}
           git add .
           git commit -m 'Deploy'
           git push origin HEAD --force
