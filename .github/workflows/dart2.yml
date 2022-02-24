@@ -49,7 +49,7 @@ jobs:
         # run: sh deploy.sh
         run: |
           flutter build web --release
-          cp build/web docs
+          cp -r build/web docs
           git add .
           git commit -m 'Deploy'
           git push origin HEAD --force
