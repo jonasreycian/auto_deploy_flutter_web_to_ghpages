@@ -48,7 +48,7 @@ jobs:
         # run: sh deploy.sh
         run: |
           flutter build web --release
-          cp -r build/web docs
+          cp -r build/web/ docs
           git config user.name "Jonas Reycian"
           git config user.email "jonasreycian@gmail.com"
           git add .
