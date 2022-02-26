@@ -70,20 +70,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Install Flutter
-        uses: britannio/action-install-flutter@v1.1
+      - name: Clone Flutter repository with stable channel
+        uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
         with:
           version: stable
+      - run: flutter doctor -v
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Analyze project source
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test
+      - name: Build and deploy to GitHub pages
+        run: |
+          flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
+          sed -i 's/\/auto_/auto_/g' build/web/index.html
+          cp -r build/web/* docs
+          git config user.name "Jonas Reycian"
+          git config user.email 26056462+jonasreycian@users.noreply.github.com
+          git add .
+          git commit -m 'Deploy'
+          git push origin HEAD --force
+          rm -r build
 ```
 
 - This will do a general checking or testing of your project with stable version of Flutter in an Ubuntu environment. It can be considered as continouos integration (CI).
