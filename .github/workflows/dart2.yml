@@ -11,68 +11,50 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Install Flutter
-        # You may pin to the exact commit or the version.
-        # uses: britannio/action-install-flutter@a486b7e3148e54a76390d849100b9dee819ff810
-        uses: britannio/action-install-flutter@v1.1
+      - name: Clone Flutter repository with stable channel
+        uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
         with:
-          # The channel/version of Flutter to be used e.g., beta or 2.0.0
           version: stable
+      - run: flutter doctor -v
 
       - name: Install dependencies
+        uses: actions/checkout@v2
         run: flutter pub get
+        
+      - name: Build Flutter Web
+        run: flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
-
-      # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: Analyze project source
-        run: flutter analyze
-
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
-      - name: Run tests
-        run: flutter test
-
-      # - name: Build web
-      #   run: flutter build web
-      # - name: Deploy to GitHub pages
-      #   # run: sh deploy.sh
-      #   run: |
-      #     flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
-      #     sed -i 's/\/auto_/auto_/g' build/web/index.html
-      #     cp -r build/web/* docs
-      #     git config user.name "Jonas Reycian"
-      #     git config user.email "jonasreycian@gmail.com"
-      #     git add .
-      #     git commit -m 'Deploy'
-      #     git push origin HEAD --force
-      #     rm -r build
-      #   env:
-      #    USER_NAME: ${{ secrets.USER_NAME }}
-      #    USER_EMAIL: ${{ secrets.USER_EMAIL }}
-  
-  deploy-to-web:
-    name: Deploy to GitHub Pages 
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub pages
         run: |
-          flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
           sed -i 's/\/auto_/auto_/g' build/web/index.html
           cp -r build/web/* docs
-          git config user.name "Jonas Reycian"
-          git config user.email "jonasreycian@gmail.com"
+          git config user.name $USER_NAME
+          git config user.email $USER_EMAIL
           git add .
           git commit -m 'Deploy'
           git push origin HEAD --force
           rm -r build
+        env:
+         USER_NAME: ${{ secrets.USER_NAME }}
+         USER_EMAIL: ${{ secrets.USER_EMAIL }}
+  
+  # deploy-to-web:
+  #   name: Deploy to GitHub Pages 
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Deploy to GitHub pages
+  #       run: |
+  #         flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
+  #         sed -i 's/\/auto_/auto_/g' build/web/index.html
+  #         cp -r build/web/* docs
+  #         git config user.name "Jonas Reycian"
+  #         git config user.email "jonasreycian@gmail.com"
+  #         git add .
+  #         git commit -m 'Deploy'
+  #         git push origin HEAD --force
+  #         rm -r build
