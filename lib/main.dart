@@ -32,7 +32,13 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Text('CI/CD with Flutter Web and Github Pages'),
+              Text(
+                'CI/CD with Flutter Web and Github Pages',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Text(
                   'First, we have to create a flutter project. So open you terminal and execute the following command:'),
               Text('flutter create cicd_flutter_web_demo'),
