@@ -14,14 +14,14 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Clone Flutter repository with stable channel
         uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
         with:
           version: stable
       - run: flutter doctor -v
-
+        
       - name: Install dependencies
-        uses: actions/checkout@v2
         run: flutter pub get
         
       - name: Build Flutter Web
