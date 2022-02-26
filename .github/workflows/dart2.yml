@@ -60,9 +60,19 @@ jobs:
       #    USER_NAME: ${{ secrets.USER_NAME }}
       #    USER_EMAIL: ${{ secrets.USER_EMAIL }}
   
-  # deploy-web:
-  #   name: Deploy to GitHub Pages 
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - 
+  deploy-to-web:
+    name: Deploy to GitHub Pages 
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub pages
+        run: |
+          flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
+          sed -i 's/\/auto_/auto_/g' build/web/index.html
+          cp -r build/web/* docs
+          git config user.name "Jonas Reycian"
+          git config user.email "jonasreycian@gmail.com"
+          git add .
+          git commit -m 'Deploy'
+          git push origin HEAD --force
+          rm -r build
