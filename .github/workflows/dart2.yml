@@ -24,11 +24,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
-      - name: Build Flutter Web
-        run: flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
 
-      - name: Deploy to GitHub pages
+      - name: Build and deploy to GitHub pages
         run: |
+          flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
           sed -i 's/\/auto_/auto_/g' build/web/index.html
           cp -r build/web/* docs
           git config user.name $USER_NAME
