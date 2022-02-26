@@ -26,16 +26,29 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Deploy to Github Pages'),
-      ),
       body: Container(
-        color: Colors.amber[50],
+        color: Colors.grey[100],
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
-              Text('My first blog!'),
+              Text('CI/CD with Flutter Web and Github Pages'),
+              Text(
+                  'First, we have to create a flutter project. So open you terminal and execute the following command:'),
+              Text('flutter create cicd_flutter_web_demo'),
+              Text(
+                  'This will create a new folder called cicd_flutter_web_demo in your current directory.'),
+              Text(
+                  'Go to the cicd_flutter_web_demo folder and execute the following command:'),
+              Text('flutter run -d chrome'),
+              Text(
+                  'This will open a new window with the Flutter Web application.'),
+              Text(
+                  'Now we have to create a Github repository. So open your browser and go to your Github account and create a new repository.'),
+              Text(
+                  'The name of the repository should be cicd_flutter_web_demo.'),
+              Text(
+                  'Now we have to add the cicd_flutter_web_demo folder to the Github repository.'),
             ],
           ),
         ),
