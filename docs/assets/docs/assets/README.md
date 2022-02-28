@@ -94,5 +94,3 @@ jobs:
           git push origin HEAD --force
           rm -r build
 ```
-
-- Visit my Github [repo](https://github.com/jonasreycian/auto_deploy_flutter_web_to_ghpages) for any suggestions for improvements.
