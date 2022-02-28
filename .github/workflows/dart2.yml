@@ -29,4 +29,9 @@ jobs:
           flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
           sed -i 's/\/auto_/auto_/g' build/web/index.html
           cp -r build/web/* docs
-          
+          git config user.name "Jonas Reycian"
+          git config user.email 26056462+jonasreycian@users.noreply.github.com
+          git add .
+          git commit -m 'Deploy'
+          git push origin HEAD --force
+          rm -r build

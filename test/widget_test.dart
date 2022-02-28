@@ -10,9 +10,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:auto_deploy_flutter_web_to_ghpages/main.dart';
 
 void main() {
+  const String _mk = """
+  # Test Markdown
+  """;
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(
+      const MyApp(mk: _mk),
+    );
 
     // Verify that our counter starts at 0.
     expect(find.text('Hello World'), findsNothing);

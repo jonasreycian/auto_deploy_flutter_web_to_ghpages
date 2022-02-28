@@ -79,26 +79,18 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build and deploy to GitHub pages
+      - name: Build the project
         run: |
           flutter build web --release --base-href //auto_deploy_flutter_web_to_ghpages/
           sed -i 's/\/auto_/auto_/g' build/web/index.html
+
+      - name: Copy the build and deploy to GitHub pages
+        run: |
           cp -r build/web/* docs
-          git config user.name "Jonas Reycian"
-          git config user.email 26056462+jonasreycian@users.noreply.github.com
+          git config user.name __YOUR_NAME_HERE__
+          git config user.email __YOUR_EMAIL_HERE__
           git add .
           git commit -m 'Deploy'
           git push origin HEAD --force
           rm -r build
 ```
-
-- This will do a general checking or testing of your project with stable version of Flutter in an Ubuntu environment. It can be considered as continouos integration (CI).
-- Before we create a deploy script, let's take a look at the _Settings -> Pages_.
-- Under `Source`, the default branch is `master` and the next option `root or docs` is where the build files should be located.
-- In this tutorial, we will transfer our build files to docs directory.
-
-```bash
-cp -r build/web/* docs
-```
-
-- Now, our file are transfered to
